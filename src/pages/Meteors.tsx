@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Tooltip } from 'antd';
 
-import { IMeteorData, convertToIMeteorData, infoModal } from '../Utils';
+import { IMeteorData, convertToIMeteorData, infoModal, parseMassToGrams } from '../Utils';
 import { MeteorTable } from '../components/presentational/MeteorTable';
 import { WidePageWrapper, 
          QueryBar, 
@@ -35,17 +35,6 @@ export const Meteors = () => {
             setData(parsedData);
         })();
     }, []); // executed once
-   
-    const parseMassToGrams = (mass:string) => {
-        // mass of 0 is equivalent to mass filter not being applied
-        if (!mass) return undefined;
-
-        // parse mass query with possible unit suffix to numeric value in grams
-        const parsedMass = mass.match(/\d/g);
-        const cleanMassInput = (parsedMass ? parseInt(parsedMass.join('')) : +Infinity); // If input is invalid, no entry will match
-        // return value in grams to search through data
-        return cleanMassInput * (mass.toLowerCase().includes('kg') ? 1000 : mass.toLowerCase().includes('mg') ? 0.001 : 1);
-    };
     
     // find the first occurence of a meteor with requested mass if in the chosen year there are none
     const getValidYearOfMassPresense = (year:number, mass?:number) => {

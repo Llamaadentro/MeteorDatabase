@@ -39,3 +39,14 @@ export const infoModal = (year:number) => {
       onOk() {},
     });
   }
+
+  export const parseMassToGrams = (mass:string) => {
+    // mass of 0 is equivalent to mass filter not being applied
+    if (!mass) return undefined;
+
+    // parse mass query with possible unit suffix to numeric value in grams
+    const parsedMass = mass.match(/\d/g);
+    const cleanMassInput = (parsedMass ? parseInt(parsedMass.join('')) : +Infinity); // If input is invalid, no entry will match
+    // return value in grams to search through data
+    return cleanMassInput * (mass.toLowerCase().includes('kg') ? 1000 : mass.toLowerCase().includes('mg') ? 0.001 : 1);
+};

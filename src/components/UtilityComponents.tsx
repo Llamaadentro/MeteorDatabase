@@ -10,7 +10,7 @@ type SpinnerProps = {
 export const Spinner: React.FC<SpinnerProps> = ({ loading, children }) => {
     return <Spin
         spinning={loading}
-        indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+        indicator={<LoadingOutlined style={{ fontSize: 24, marginTop:'20vh' }} spin />}
     >
         {!loading && [children]}
     </Spin>;
