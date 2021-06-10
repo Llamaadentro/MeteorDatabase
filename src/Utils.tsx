@@ -1,3 +1,5 @@
+import { Modal } from 'antd';
+
 export interface IMeteorData {
     key: number,
     name: string,
@@ -23,3 +25,17 @@ export const convertToIMeteorData = (entry: any): IMeteorData => {
         } : undefined
     }
 };
+
+export const infoModal = (year:number) => {
+    Modal.info({
+      title: (<b>No entry matching the criteria was found.</b>),
+      okButtonProps: {type: 'default', style:{backgroundColor:'#ffcc00', border: '1px solid #ffcc00', color: 'black'}},
+      width: 500,
+      content: (
+        <div>
+            <h3>Time filter was shifted to match the first entry with specified mass(year <strong>{year}</strong>).</h3>
+        </div>
+      ),
+      onOk() {},
+    });
+  }

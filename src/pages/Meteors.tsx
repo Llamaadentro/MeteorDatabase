@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Tooltip } from 'antd';
 
-import { IMeteorData, convertToIMeteorData } from '../Utils';
+import { IMeteorData, convertToIMeteorData, infoModal } from '../Utils';
 import { MeteorTable } from '../components/presentational/MeteorTable';
 import { WidePageWrapper, 
          QueryBar, 
@@ -57,7 +57,7 @@ export const Meteors = () => {
             return year; 
         } else {
             // first alphabetic occurence of a meteor with specified mass
-            return data[data.findIndex((meteor: IMeteorData) => Number(meteor.mass) > mass)]?.year; 
+            return data[data.findIndex((meteor: IMeteorData) => Number(meteor.mass) > mass && !Number.isNaN(meteor.year))]?.year; 
         }
     };
 
@@ -67,7 +67,7 @@ export const Meteors = () => {
             const validYear = getValidYearOfMassPresense(parseInt(year), parseMassToGrams(minMass));
             
             if (validYear !== undefined && validYear !== parseInt(year)) {
-                alert('Nothing found, changing year');
+                infoModal(validYear);
                 setYear(`${validYear}`);
             }                                    
             setFilter({ year: validYear, minMass: parseMassToGrams(minMass) })
