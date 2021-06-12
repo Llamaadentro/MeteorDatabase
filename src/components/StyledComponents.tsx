@@ -52,8 +52,9 @@ export const QueryBar = styled.div`
     position: relative;
 	margin-right: auto;
 	margin-left: auto;
-	width: 60%;
-	height: 90px;
+	width: 60vw;
+	min-width: 650px;
+	min-height: 90px;
 	background: black;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
