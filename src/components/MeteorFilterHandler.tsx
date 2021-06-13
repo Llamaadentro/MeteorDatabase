@@ -13,7 +13,7 @@ import { QueryBar,
          BarMenuButton} from './StyledComponents';
 
 export const MeteorFilterHandler = ({data}:{data: IMeteorData[]}) => {
-    const [filter, setFilter] = useState({} as { year?: number, minMass?: number, showAll?: boolean });
+    const [filter, setFilter] = useState({showAll:true} as { year?: number, minMass?: number, showAll?: boolean });
     const [year, setYear] = useState("");
     const [minMass, setMinMass] = useState("");
    
