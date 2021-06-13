@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import { Table } from 'antd';
+import { Table, Tooltip } from 'antd';
 
 import { IMeteorData } from '../../Utils';  
 import { TableTextRow, TableNameRow } from '../StyledComponents';
@@ -39,11 +39,13 @@ export const MeteorTable = ({data}:{data: IMeteorData[]}) => {
             title: 'Coordinates',
             dataIndex: 'coordinates',
             render: (coordinates: {latitude:number, longitude:number}) => coordinates ? 
-                <a href={`http://google.com/maps/@${coordinates.latitude},${coordinates.longitude},7z`} 
-                target='_blanc' 
-                style={{margin: 0}}>
-                {coordinatesToString(coordinates)}
-                </a> : 
+                <Tooltip placement="topLeft" title='Click to view location on Google Maps'>
+                    <a href={`http://google.com/maps/@${coordinates.latitude},${coordinates.longitude},7z`} 
+                    target='_blanc' 
+                    style={{margin: 0}}>
+                    {coordinatesToString(coordinates)}
+                    </a>
+                </Tooltip> : 
                 <TableTextRow>unknown</TableTextRow>
         }
   ];
